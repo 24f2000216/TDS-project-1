@@ -227,7 +227,7 @@ async def process_task(request: dict):
         if round_count > 1:
             try:
                 from src.github import get_repo
-                repo_name = f"project-1-{nonce}"
+                repo_name = f"project-1-{task_id}"
                 existing_files = get_repo(repo_name)
                 
                 # Format existing code for the prompt
@@ -248,12 +248,12 @@ async def process_task(request: dict):
         # Step 3: Handle repository (create on round 1, use existing on round > 1)
         if round_count == 1:
             print("Creating new GitHub repository...")
-            repo = create_repo(nonce)
+            repo = create_repo(task_id)
             repo_name = repo['repo_name']
             repo_url = repo['repo_url']
             print(f"✓ Repository created: {repo_name}")
         else:
-            repo_name = f"project-1-{nonce}"
+            repo_name = f"project-1-{task_id.lower().replace(' ', '-')}"
             repo_url = f"https://github.com/{github_username}/{repo_name}"
             print(f"Updating existing repository: {repo_name}")
         
