@@ -272,7 +272,7 @@ async def process_task(request: dict):
                 print(f"⚠ Warning: Could not enable GitHub Pages: {e}")
         
         # Wait for pages to become available
-        await asyncio.sleep(2)
+        await asyncio.sleep(20)
         page_url = f"https://{github_username}.github.io/{repo_name}/"
         print(f"GitHub Pages URL: {page_url}")
         
